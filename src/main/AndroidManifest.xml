@@ -6,6 +6,17 @@
 	             android:supportsRtl="true"
 		>
 
+		<!-- Example declaration of content provider shared preferences -->
+		<!--
+
+		<provider
+			android:authorities="@string/content_provider_authority"
+			android:name="samuelpalmer.common.contentprovidersharedpreferences.SharedPreferencesContentProvider"
+			android:exported="false"
+			android:process="@string/service_process_name" />
+
+		-->
+
 	</application>
 
 </manifest>
