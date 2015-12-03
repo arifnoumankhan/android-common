@@ -4,15 +4,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+    android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"
     android:id="@+id/notification_button"
     android:scaleType="center"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:padding="0dp"
-    tools:showIn="@layout/notification_buttons"
     android:minWidth="0dp"
     tools:ignore="ContentDescription"
     />
 
-<!-- The theme is needed to make the buttons animate when pressed -->
+<!-- The style is needed to make the buttons animate when pressed on Samsung Galaxy S5 -->
+<!-- The theme is needed to make the buttons animate when pressed on CyanogenMod -->
