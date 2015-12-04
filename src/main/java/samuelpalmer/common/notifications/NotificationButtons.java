@@ -19,6 +19,9 @@ public class NotificationButtons {
 		content.removeAllViews(R.id.notification_buttons_main_content);
 	}
 
+	/**
+	 * @param icon 32 dip x 32 dip (including padding), white
+	 */
 	public NotificationButtons configureButton(int id, int icon, PendingIntent onClickIntent, CharSequence contentDescription) {
 		content.setImageViewResource(id, icon);
 		content.setInt(id, "setColorFilter", actionButtonColour(icon));
