@@ -1,14 +1,12 @@
 package samuelpalmer.common.notifications;
 
 import android.app.Notification;
-import android.app.Notification.Action;
-import android.app.Notification.Builder;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Build.VERSION;
+import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -50,27 +48,13 @@ final class NotificationStyles {
 
 	private void extractColors()
 	{
-		Builder builder = new Builder(context).setContentTitle(title.searchTip);
-
-		//Add action button
-		String actionTitle = actionButton.searchTip;
 		PendingIntent intent = PendingIntent.getActivity(context, 0, new Intent(""), 0);
-
-		if (VERSION.SDK_INT >= 23)
-			builder.addAction(new Action.Builder(Icon.createWithResource(context, exampleIconResource), actionTitle, intent).build());
-		else if (VERSION.SDK_INT >= 16)
-			//noinspection deprecation
-			builder.addAction(exampleIconResource, actionTitle, intent);
-
-		//Build
-		Notification notification;
-		if (VERSION.SDK_INT >= 16)
-			notification = builder.build();
-		else
-			//noinspection deprecation
-			notification = builder.getNotification();
-
-		LinearLayout group = new LinearLayout(context);
+		
+		Notification notification =
+			new NotificationCompat.Builder(context)
+				.setContentTitle(title.searchTip)
+				.addAction(exampleIconResource, actionButton.searchTip, intent)
+				.build();
 
 		RemoteViews contentView;
 		if (VERSION.SDK_INT >= 16)
@@ -78,6 +62,7 @@ final class NotificationStyles {
 		else
 			contentView = notification.contentView;
 
+		LinearLayout group = new LinearLayout(context);
 		ViewGroup event = (ViewGroup) contentView.apply(context, group);
 		recurseGroup(event);
 		group.removeAllViews();
