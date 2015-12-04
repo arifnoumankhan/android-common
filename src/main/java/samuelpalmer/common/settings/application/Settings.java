@@ -79,6 +79,12 @@ public class Settings {
 			transaction.commit();
 		}
 
+		public void remove() {
+			Transaction transaction = new Transaction();
+			remove(transaction);
+			transaction.commit();
+		}
+
 		public void enqueue(T value, Transaction transaction) {
 			if (value == null)
 				throw new IllegalArgumentException("value is null");
