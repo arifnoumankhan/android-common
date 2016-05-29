@@ -84,6 +84,8 @@ final class NotificationStyles {
 
 		if (title.colour == null)
 			Log.w(NotificationStyles.class.getSimpleName(), "Couldn't find notification title colour");
+		if (VERSION.SDK_INT >= 16 && actionButton.colour == null)
+			Log.w(NotificationStyles.class.getSimpleName(), "Couldn't find notification action colour");
 	}
 
 	private void recurseGroup(ViewGroup viewGroup)
