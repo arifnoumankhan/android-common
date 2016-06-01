@@ -1,6 +1,5 @@
 package samuelpalmer.common.notifications;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Build.VERSION;
@@ -33,9 +32,8 @@ public class NotificationButtons {
 		return this;
 	}
 
-	public void applyTo(Notification notification) {
-		content.addView(R.id.notification_buttons_main_content, notification.contentView);
-		notification.contentView = content;
+	public RemoteViews getContentView() {
+		return content;
 	}
 
 	private int actionButtonColour(int exampleIcon) {

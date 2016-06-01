@@ -3,10 +3,12 @@ package samuelpalmer.common.notifications;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Action;
+import android.app.Notification.Style;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.widget.RemoteViews;
 
@@ -44,7 +46,9 @@ public class NotificationBuilderCompat {
 	public static NotificationBuilderCompat create(Context context) {
 		NotificationBuilderCompat result;
 
-		if (Build.VERSION.SDK_INT >= 23)
+		if (VERSION.SDK_INT >= 23 && VERSION.PREVIEW_SDK_INT == 3)
+			result = new V24();
+		else if (Build.VERSION.SDK_INT >= 23)
 			result = new V23();
 		else if (Build.VERSION.SDK_INT >= 21)
 			result = new V21();
@@ -143,6 +147,14 @@ public class NotificationBuilderCompat {
 		return this;
 	}
 
+	public NotificationBuilderCompat setStyle(Style style) {
+		return this;
+	}
+
+	public NotificationBuilderCompat setCustomContentView(RemoteViews view) {
+		return this;
+	}
+
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private static class V16 extends NotificationBuilderCompat
 	{
@@ -161,6 +173,12 @@ public class NotificationBuilderCompat {
 		public NotificationBuilderCompat addAction(int icon, CharSequence title, PendingIntent intent) {
 			//noinspection deprecation
 			builder.addAction(icon, title, intent);
+			return this;
+		}
+
+		@Override
+		public NotificationBuilderCompat setStyle(Style style) {
+			builder.setStyle(style);
 			return this;
 		}
 	}
@@ -203,6 +221,16 @@ public class NotificationBuilderCompat {
 		@Override
 		public NotificationBuilderCompat addAction(int icon, CharSequence title, PendingIntent intent) {
 			builder.addAction(new Action.Builder(Icon.createWithResource(context, icon), title, intent).build());
+			return this;
+		}
+	}
+
+	@TargetApi(VERSION_CODES.N)
+	private static class V24 extends V23
+	{
+		@Override
+		public NotificationBuilderCompat setCustomContentView(RemoteViews contentView) {
+			builder.setCustomContentView(contentView);
 			return this;
 		}
 	}

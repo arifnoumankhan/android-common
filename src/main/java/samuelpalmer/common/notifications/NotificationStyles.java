@@ -59,6 +59,7 @@ final class NotificationStyles {
 
 		LinearLayout group = new LinearLayout(context);
 
+		//TODO: On Android N, these content views are both null. Get this working.
 		RemoteViews contentView;
 		if (VERSION.SDK_INT >= 16)
 			contentView = notification.bigContentView;
