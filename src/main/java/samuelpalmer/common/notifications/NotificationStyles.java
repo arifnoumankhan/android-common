@@ -1,6 +1,5 @@
 package samuelpalmer.common.notifications;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -21,10 +20,12 @@ final class NotificationStyles {
 	private final StyleType actionButton = new StyleType("ACTION");
 	private final Context context;
 	private final int exampleIconResource;
+	private final int colourArgb;
 
-	public NotificationStyles(Context context, int exampleIconResource) {
+	public NotificationStyles(Context context, int exampleIconResource, int colourArgb) {
 		this.context = context;
 		this.exampleIconResource = exampleIconResource;
+		this.colourArgb = colourArgb;
 		extractColors();
 	}
 
@@ -47,7 +48,9 @@ final class NotificationStyles {
 
 	private void extractColors()
 	{
-		NotificationBuilderCompat builder = NotificationBuilderCompat.create(context).setContentTitle(title.searchTip);
+		NotificationBuilderCompat builder = NotificationBuilderCompat.create(context)
+			.setContentTitle(title.searchTip)
+			.setColor(colourArgb); //Android N seems to use the colour on the action buttons
 
 		//Add action button
 		String actionTitle = actionButton.searchTip;
@@ -55,17 +58,9 @@ final class NotificationStyles {
 		builder.addAction(exampleIconResource, actionTitle, intent);
 
 		//Build
-		Notification notification = builder.build();
+		RemoteViews contentView = getContentView(builder);
 
 		LinearLayout group = new LinearLayout(context);
-
-		//TODO: On Android N, these content views are both null. Get this working.
-		RemoteViews contentView;
-		if (VERSION.SDK_INT >= 16)
-			contentView = notification.bigContentView;
-		else
-			contentView = notification.contentView;
-
 		ViewGroup event = (ViewGroup) contentView.apply(context, group);
 		recurseGroup(event);
 		group.removeAllViews();
@@ -74,6 +69,17 @@ final class NotificationStyles {
 			Log.w(NotificationStyles.class.getSimpleName(), "Couldn't find notification title colour");
 		if (VERSION.SDK_INT >= 16 && actionButton.colour == null)
 			Log.w(NotificationStyles.class.getSimpleName(), "Couldn't find notification action colour");
+	}
+
+	private RemoteViews getContentView(NotificationBuilderCompat builder) {
+		if (VERSION.SDK_INT == 23 && VERSION.PREVIEW_SDK_INT == 3)
+			return builder.createBigContentView();
+		else if (VERSION.SDK_INT >= 16)
+			//noinspection deprecation
+			return builder.build().bigContentView;
+		else
+			//noinspection deprecation
+			return builder.build().contentView;
 	}
 
 	private void recurseGroup(ViewGroup viewGroup)

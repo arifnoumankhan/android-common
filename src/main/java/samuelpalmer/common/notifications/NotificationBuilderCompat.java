@@ -147,12 +147,19 @@ public class NotificationBuilderCompat {
 		return this;
 	}
 
+	//TODO: Do something better about this and OS compatibility
 	public NotificationBuilderCompat setStyle(Style style) {
 		return this;
 	}
 
+	//TODO: Do something better about this and OS compatibility
 	public NotificationBuilderCompat setCustomContentView(RemoteViews view) {
 		return this;
+	}
+
+	//TODO: Do something better about this and OS compatibility
+	public RemoteViews createBigContentView() {
+		throw new RuntimeException("Not supported on this OS version");
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -232,6 +239,11 @@ public class NotificationBuilderCompat {
 		public NotificationBuilderCompat setCustomContentView(RemoteViews contentView) {
 			builder.setCustomContentView(contentView);
 			return this;
+		}
+
+		@Override
+		public RemoteViews createBigContentView() {
+			return builder.createBigContentView();
 		}
 	}
 }
