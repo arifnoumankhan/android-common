@@ -7,11 +7,10 @@
     android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"
     android:id="@+id/notification_button"
     android:scaleType="center"
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:padding="0dp"
-    android:minWidth="0dp"
     tools:ignore="ContentDescription"
     />
 
