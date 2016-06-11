@@ -72,14 +72,8 @@ final class NotificationStyles {
 	}
 
 	private RemoteViews getContentView(NotificationBuilderCompat builder) {
-		if (VERSION.SDK_INT == 23 && VERSION.PREVIEW_SDK_INT == 3)
-			return builder.createBigContentView();
-		else if (VERSION.SDK_INT >= 16)
-			//noinspection deprecation
-			return builder.build().bigContentView;
-		else
-			//noinspection deprecation
-			return builder.build().contentView;
+		RemoteViews result = builder.createBigContentView();
+		return result == null ? builder.createContentView() : result;
 	}
 
 	private void recurseGroup(ViewGroup viewGroup)

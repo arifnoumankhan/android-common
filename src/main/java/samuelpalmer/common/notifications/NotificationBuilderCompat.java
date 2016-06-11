@@ -3,7 +3,6 @@ package samuelpalmer.common.notifications;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Action;
-import android.app.Notification.Style;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.drawable.Icon;
@@ -16,7 +15,7 @@ import android.widget.RemoteViews;
  * Basically a reinvented clone of NotificationCompat.Builder, except with a working setShowWhen
  * implementation. Not using the compat library since it increases installation size, build times, and device RAM use.
  */
-@SuppressWarnings({"UnusedDeclaration", "UnusedReturnValue"})
+@SuppressWarnings({"UnusedDeclaration", "UnusedReturnValue", "ClassWithTooManyMethods"})
 public class NotificationBuilderCompat {
 	public static final int PRIORITY_DEFAULT = 0;
 	public static final int PRIORITY_LOW = -1;
@@ -147,24 +146,19 @@ public class NotificationBuilderCompat {
 		return this;
 	}
 
-	//TODO: Do something better about this and OS compatibility
-	public NotificationBuilderCompat setStyle(Style style) {
-		return this;
-	}
-
-	//TODO: Do something better about this and OS compatibility
 	public NotificationBuilderCompat setCustomContentView(RemoteViews view) {
+		//noinspection deprecation
+		builder.setContent(view);
 		return this;
 	}
 
-	//TODO: Do something better about this and OS compatibility
 	public RemoteViews createBigContentView() {
-		throw new RuntimeException("Not supported on this OS version");
+		return null;
 	}
 
-	//TODO: Do something better about this and OS compatibility
 	public RemoteViews createContentView() {
-		throw new RuntimeException("Not supported on this OS version");
+		//noinspection deprecation
+		return build().contentView;
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -189,9 +183,9 @@ public class NotificationBuilderCompat {
 		}
 
 		@Override
-		public NotificationBuilderCompat setStyle(Style style) {
-			builder.setStyle(style);
-			return this;
+		public RemoteViews createBigContentView() {
+			//noinspection deprecation
+			return build().bigContentView;
 		}
 	}
 
