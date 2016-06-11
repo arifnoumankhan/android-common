@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.widget.RemoteViews;
 
+import samuelpalmer.common.R;
+
 public class NotificationButtons {
 
 	private final RemoteViews content;
@@ -15,7 +17,7 @@ public class NotificationButtons {
 		this.context = context;
 		this.colourArgb = colourArgb;
 		content = new RemoteViews(context.getPackageName(), layoutResource);
-//		content.removeAllViews(R.id.notification_buttons_main_content);
+		content.removeAllViews(R.id.notification_buttons_main_content);
 	}
 
 	/**

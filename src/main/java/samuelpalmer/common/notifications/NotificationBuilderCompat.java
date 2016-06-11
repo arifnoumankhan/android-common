@@ -162,6 +162,11 @@ public class NotificationBuilderCompat {
 		throw new RuntimeException("Not supported on this OS version");
 	}
 
+	//TODO: Do something better about this and OS compatibility
+	public RemoteViews createContentView() {
+		throw new RuntimeException("Not supported on this OS version");
+	}
+
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private static class V16 extends NotificationBuilderCompat
 	{
@@ -244,6 +249,11 @@ public class NotificationBuilderCompat {
 		@Override
 		public RemoteViews createBigContentView() {
 			return builder.createBigContentView();
+		}
+
+		@Override
+		public RemoteViews createContentView() {
+			return builder.createContentView();
 		}
 	}
 }
