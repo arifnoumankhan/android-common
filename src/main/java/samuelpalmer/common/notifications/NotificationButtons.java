@@ -10,14 +10,12 @@ import samuelpalmer.common.R;
 public class NotificationButtons {
 
 	private final RemoteViews content;
-	private final Context context;
-	private final int colourArgb;
+	private final int buttonColourArgb;
 
-	public NotificationButtons(Context context, int layoutResource, int colourArgb) {
-		this.context = context;
-		this.colourArgb = colourArgb;
+	public NotificationButtons(Context context, int layoutResource, int buttonColourArgb) {
 		content = new RemoteViews(context.getPackageName(), layoutResource);
 		content.removeAllViews(R.id.notification_buttons_main_content);
+		this.buttonColourArgb = buttonColourArgb;
 	}
 
 	/**
@@ -25,7 +23,7 @@ public class NotificationButtons {
 	 */
 	public NotificationButtons configureButton(int id, int icon, PendingIntent onClickIntent, CharSequence contentDescription) {
 		content.setImageViewResource(id, icon);
-		content.setInt(id, "setColorFilter", actionButtonColour(icon));
+		content.setInt(id, "setColorFilter", buttonColourArgb);
 		content.setOnClickPendingIntent(id, onClickIntent);
 
 		if (VERSION.SDK_INT >= 15)
@@ -37,16 +35,5 @@ public class NotificationButtons {
 	public RemoteViews getContentView() {
 		return content;
 	}
-
-	private int actionButtonColour(int exampleIcon) {
-		//Not thread-safe, but hopefully that won't matter
-		//TODO: Don't store this as a static anymore since it depends on the passed-in colour
-		if (actionButtonColour == null)
-			actionButtonColour = new NotificationStyles(context, exampleIcon, colourArgb).getActionButtonColour();
-
-		return actionButtonColour;
-	}
-
-	private static Integer actionButtonColour;
 
 }

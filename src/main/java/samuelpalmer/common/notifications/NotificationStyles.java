@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-final class NotificationStyles {
+public final class NotificationStyles {
 
 	private final StyleType title = new StyleType("TITLE");
 	private final StyleType actionButton = new StyleType("ACTION");
@@ -22,9 +22,9 @@ final class NotificationStyles {
 	private final int exampleIconResource;
 	private final int colourArgb;
 
-	public NotificationStyles(Context context, int exampleIconResource, int colourArgb) {
+	public NotificationStyles(Context context, int exampleActionIconResource, int colourArgb) {
 		this.context = context;
-		this.exampleIconResource = exampleIconResource;
+		this.exampleIconResource = exampleActionIconResource;
 		this.colourArgb = colourArgb;
 		extractColors();
 	}
