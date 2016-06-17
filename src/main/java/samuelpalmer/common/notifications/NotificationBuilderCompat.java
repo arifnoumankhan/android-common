@@ -45,7 +45,7 @@ public class NotificationBuilderCompat {
 	public static NotificationBuilderCompat create(Context context) {
 		NotificationBuilderCompat result;
 
-		if (VERSION.SDK_INT >= 23 && VERSION.PREVIEW_SDK_INT == 3)
+		if (VERSION.SDK_INT >= 24)
 			result = new V24();
 		else if (Build.VERSION.SDK_INT >= 23)
 			result = new V23();
