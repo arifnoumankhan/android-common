@@ -9,10 +9,10 @@ import java.util.Map;
 
 abstract class OnSharedPreferenceChangeListenerContract implements Contract<IContentProviderSharedPreferenceChangeListener, Void> {
 
-	public static final String BINDER = "binder";
-	protected static final Map<IBinder, ServerListener> listeners = new HashMap<>();
+	private static final String BINDER = "binder";
+	static final Map<IBinder, ServerListener> listeners = new HashMap<>();
 
-	protected static void unsubscribe(SharedPreferences sharedPreferences, IBinder binder) {
+	static void unsubscribe(SharedPreferences sharedPreferences, IBinder binder) {
 		synchronized (listeners) {
 			ServerListener removed = listeners.remove(binder);
 

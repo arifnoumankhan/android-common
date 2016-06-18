@@ -1,5 +1,6 @@
 package android.view;
 
+@SuppressWarnings("unused")
 public class DisplayInfo {
 
 	public int rotation;

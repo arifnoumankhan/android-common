@@ -2,6 +2,7 @@ package samuelpalmer.common.contentprovidersharedpreferences;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,10 +16,12 @@ public class SharedPreferencesContentProvider extends ContentProvider {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Bundle call(String method, String arg, Bundle extras) {
+	public Bundle call(String method, String sharedPreferencesName, Bundle extras) {
 		Contract contract = ContractMap.lookup(method);
 		Object args = contract.deserialiseArgs(extras);
-		Object result = contract.process(getContext().getSharedPreferences(arg, 0), args);
+		@SuppressWarnings("ConstantConditions")
+		SharedPreferences preferences = getContext().getSharedPreferences(sharedPreferencesName, 0);
+		Object result = contract.process(preferences, args);
 		Bundle serialisedResult = contract.serialiseResult(result);
 
 		if (serialisedResult == null)

@@ -6,7 +6,7 @@ import android.os.IBinder.DeathRecipient;
 import android.os.RemoteException;
 
 class ServerListener {
-	public final IContentProviderSharedPreferenceChangeListener client;
+	private final IContentProviderSharedPreferenceChangeListener client;
 	public final DeathRecipient deathRecipient;
 
 	public final OnSharedPreferenceChangeListener nativeListener = new OnSharedPreferenceChangeListener() {

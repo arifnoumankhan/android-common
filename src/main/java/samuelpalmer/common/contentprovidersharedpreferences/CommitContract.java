@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 class CommitContract extends EditorContract<Boolean> {
 
-	public static final String SUCCESS = "success";
+	private static final String SUCCESS = "success";
 
 	@Override
 	public String methodName() {
