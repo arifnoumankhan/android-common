@@ -4,7 +4,6 @@
 		<item name="android:baselineAligned">false</item>
 	</style>
 
-	<!-- TODO: See if you can make the buttons expand to fill available space while still being compatible with Android N. -->
 	<style name="notification_buttons">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">match_parent</item>
