@@ -72,11 +72,6 @@ public class NotificationBuilderCompat {
 		return this;
 	}
 
-	public NotificationBuilderCompat setContent(RemoteViews views) {
-		builder.setContent(views);
-		return this;
-	}
-
 	public NotificationBuilderCompat setContentIntent(PendingIntent intent) {
 		builder.setContentIntent(intent);
 		return this;
@@ -134,11 +129,6 @@ public class NotificationBuilderCompat {
 
 	public NotificationBuilderCompat setVibrate(long[] pattern) {
 		builder.setVibrate(pattern);
-		return this;
-	}
-
-	public NotificationBuilderCompat setContentInfo(CharSequence info) {
-		builder.setContentInfo(info);
 		return this;
 	}
 
