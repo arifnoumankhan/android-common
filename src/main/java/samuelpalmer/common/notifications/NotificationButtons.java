@@ -14,7 +14,7 @@ public class NotificationButtons {
 
 	public NotificationButtons(Context context, int layoutResource, int buttonColourArgb) {
 		content = new RemoteViews(context.getPackageName(), layoutResource);
-		content.removeAllViews(R.id.notification_buttons_main_content);
+		content.removeAllViews(R.id.notification_content);
 		this.buttonColourArgb = buttonColourArgb;
 	}
 
